@@ -18,7 +18,7 @@ app.use("/products", productRoutes);
 app.use('/fileUpload', express.static('uploads'))
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+  res.json({ message: "Express deploy to vercel" });
 })
 
 connectMongoDB(mongoConnectionStr);
@@ -26,5 +26,3 @@ connectMongoDB(mongoConnectionStr);
 app.listen(PORT, () => {
   console.log(`express app running on http://localhost:${PORT}`.bgBlue);
 })
-
-export default app;
