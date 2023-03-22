@@ -1,41 +1,30 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
+import colors from "colors";
 import productRoutes from "./routes/productRoute.js";
-import cloudinary from "./cloudinary.js";
-import upload from './multer.js';
 import * as dotenv from 'dotenv';
-
-const PORT = 8080;
-const mongoConnectionStr = 'mongodb+srv://gegiimz96:WZPB0AMnanB1ip8a@cluster0.fankm0j.mongodb.net/test';
-
+import connectMongoDB from "./config/mongoDB.js";
 dotenv.config();
+
+const PORT = process.env.PORT;
+const mongoConnectionStr = process.env.MONGO_URL;
 const app = express();
+
+app.use(express.static('public'))
 app.use(express.json());
 app.use(cors());
 
 app.use("/products", productRoutes);
 app.use('/fileUpload', express.static('uploads'))
 
-mongoose
-  .connect(mongoConnectionStr)
-  .then(() => console.log(`Database connected successfully`))
-  .catch((err) => console.error(err))
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+})
 
-// app.post('/fileUpload', upload.single('image'), function (req, res, next) {
-//   res.send(req.file);
-//   console.log("reqfile", req.file);
-// })
-
-// app.post('/upload', upload.single('file'), async (req, res) => {
-//   const uploadCloud = await cloudinary.v2.uploader.upload(req.file.path);
-//   console.log("uploadCloud", uploadCloud);
-//   return res.json({
-//     success: true,
-//     file: uploadCloud.secure_url
-//   })
-// })
+connectMongoDB(mongoConnectionStr);
 
 app.listen(PORT, () => {
-  console.log(`express app running on http://localhost:${PORT}`);
+  console.log(`express app running on http://localhost:${PORT}`.bgBlue);
 })
+
+export default app;
