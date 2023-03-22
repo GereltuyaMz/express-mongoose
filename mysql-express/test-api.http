@@ -1,0 +1,29 @@
+GET http://localhost:8001/categories
+
+###
+POST http://localhost:8001/category
+content-type: application/json
+
+{
+  "name":"Stationary",
+  "slug": "stationary",
+  "imgUrl" : "img-url"
+}
+
+###
+GET http://localhost:8001/category/2
+content-type: application/json
+
+###
+PUT http://localhost:8001/category?id=3
+content-type: application/json
+
+{
+  "name":"Car1",
+  "slug": "car1",
+  "imgUrl" : "img-url1"
+}
+
+###
+DELETE http://localhost:8001/category?id=3
+content-type: application/json
