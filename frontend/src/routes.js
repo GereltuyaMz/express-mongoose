@@ -7,9 +7,10 @@ import Category from './pages/Category';
 import Product from './pages/Product';
 import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct';
+import SignUp from './pages/SignUp';
 
 const Router = () => {
-  
+
   return (
     <Routes>
       <Route path='/' element={<Dashboard />} />
@@ -19,6 +20,7 @@ const Router = () => {
       <Route path='/profile' element={<Profile />} />
       <Route path='/addproduct' element={<AddProduct />} />
       <Route path='/editproduct/:id' element={<EditProduct />} />
+      <Route path='/signup' element={<SignUp />} />
     </Routes>
   )
 }

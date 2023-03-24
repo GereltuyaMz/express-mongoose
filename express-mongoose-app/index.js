@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import colors from "colors";
 import productRoutes from "./routes/productRoute.js";
+import userRoutes from "./routes/userRoute.js";
 import * as dotenv from 'dotenv';
 import connectMongoDB from "./config/mongoDB.js";
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/products", productRoutes);
+app.use("/users", userRoutes)
 app.use('/fileUpload', express.static('uploads'))
 
 app.get('/', (req, res) => {
